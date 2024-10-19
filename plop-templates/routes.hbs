@@ -1,0 +1,11 @@
+// src/routes/index.js
+// Aquí se definen las rutas que maneja nuestro servidor
+
+const express = require('express');
+const router = express.Router();
+const { getHome } = require('../controllers/indexController');
+
+// Ruta de inicio
+router.get('/', getHome);
+
+module.exports = router;

@@ -1,0 +1,51 @@
+// src/app.js
+// Archivo principal para configurar y ejecutar el servidor Express
+
+const express = require('express');
+const morgan = require('morgan');
+const helmet = require('helmet');
+const cors = require('cors');
+const colors = require('colors');
+require('dotenv').config();
+
+const connectMongoDB = require('./config/config-mongo');
+const { connectMySQL } = require('./config/config-mysql');
+const { connectPostgres } = require('./config/config-postgres');
+
+const app = express();
+
+// Seleccionar conexión de base de datos
+const DB_TYPE = process.env.DB_TYPE || 'mysql'; // mongodb, mysql o postgres
+
+(async () => {
+    try {
+        if (DB_TYPE === 'mysql') {
+            await connectMongoDB();
+        } else if (DB_TYPE === 'mongodb') {
+            await connectMySQL();
+        } else if (DB_TYPE === 'postgres') {
+            await connectPostgres();
+        } else {
+            throw new Error('Tipo de base de datos no soportado');
+        }
+    } catch (err) {
+        console.error(err.message.red);
+        process.exit(1);
+    }
+})();
+
+// Middlewares
+app.use(morgan('dev'));
+app.use(helmet());
+app.use(cors());
+app.use(express.json());
+
+// Rutas
+const indexRoutes = require('./routes/index');
+app.use('/', indexRoutes);
+
+// Iniciar el servidor
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en el puerto ${PORT}`.cyan);
+});
