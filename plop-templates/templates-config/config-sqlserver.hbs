@@ -1,0 +1,31 @@
+const mssql = require('mssql');
+require('dotenv').config();
+
+
+
+
+// parametros de conexion
+const connectionSetting = {
+  server: process.env.DB_SERVER,
+  database: process.env.DB_NAME,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  option: {
+    encrypt: true,
+    trustServerCertificate: true
+  }
+}
+
+const pool = new mssql.ConnectionPool(connectionSetting);
+
+const ConnectSqlServer = pool.connect()
+  .then(pool => {
+    console.log('Conectado a SQlServer'.green);
+    return pool;
+  })
+  .catch(err => {
+    console.error("Error de conexión a SQL Server:", err);
+    process.exit(1);
+  });
+
+module.exports = { ConnectSqlServer, mssql};

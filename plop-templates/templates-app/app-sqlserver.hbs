@@ -1,0 +1,35 @@
+// src/app.js
+// Configuración del servidor con PostgreSQL
+
+const express = require('express');
+const morgan = require('morgan');
+const helmet = require('helmet');
+const cors = require('cors');
+const colors = require('colors');
+require('dotenv').config();
+const { ConnectSqlServer } = require('./config/config-sqlserver');
+
+const app = express();
+
+// Conectar a SQL Server
+ConnectSqlServer.then(pool => {
+        console.log("Conexión establecida".green);
+    }).catch(err => {
+        console.error("Error en la conexión:", err);
+    });
+
+// Middlewares
+app.use(morgan('dev'));
+app.use(helmet());
+app.use(cors());
+app.use(express.json());
+
+// Rutas
+const indexRoutes = require('./routes/index');
+app.use('/', indexRoutes);
+
+// Iniciar el servidor
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en el puerto ${PORT}`.cyan);
+});
