@@ -45,7 +45,7 @@ module.exports = function (plop) {
                 type: 'list',
                 name: 'dbType',
                 message: '¿Qué tipo de base de datos usarás?',
-                choices: ['MongoDB', 'MySQL', 'PostgreSQL']
+                choices: ['MongoDB', 'MySQL', 'PostgreSQL', 'SQLServer']
             },
         ],
         actions: function (data) {
@@ -108,7 +108,7 @@ module.exports = function (plop) {
                     { type: 'add', path: '{{pascalCase name}}/src/app.js', templateFile: 'plop-templates/templates-app/app-mongo.hbs' },
 
                     // Archivo .env personalizado para MongoDB
-                    { type: 'add', path: '{{pascalCase name}}/src/.env', templateFile: 'plop-templates/templates-env/env-mongo.hbs' }
+                    { type: 'add', path: '{{pascalCase name}}/.env', templateFile: 'plop-templates/templates-env/env-mongo.hbs' }
                 );
             }
 
@@ -124,7 +124,7 @@ module.exports = function (plop) {
                     { type: 'add', path: '{{pascalCase name}}/src/app.js', templateFile: 'plop-templates/templates-app/app-mysql.hbs' },
 
                     // Archivo .env personalizado para MySQL
-                    { type: 'add', path: '{{pascalCase name}}/src/.env', templateFile: 'plop-templates/templates-env/env-mysql.hbs' }
+                    { type: 'add', path: '{{pascalCase name}}/.env', templateFile: 'plop-templates/templates-env/env-mysql.hbs' }
                 );
             }
 
@@ -140,10 +140,25 @@ module.exports = function (plop) {
                     { type: 'add', path: '{{pascalCase name}}/src/app.js', templateFile: 'plop-templates/templates-app/app-postgres.hbs' },
 
                     // Archivo .env personalizado para PostgreSQL
-                    { type: 'add', path: '{{pascalCase name}}/src/.env', templateFile: 'plop-templates/templates-env/env-postgres.hbs' }
+                    { type: 'add', path: '{{pascalCase name}}/.env', templateFile: 'plop-templates/templates-env/env-postgres.hbs' }
                 );
             }
 
+            if (data.dbType === 'SQLServer') {
+                actions.push(
+                    // Archivo de configuración para SQL Server
+                    { type: 'add', path: '{{pascalCase name}}/src/config/config-sqlserver.js', templateFile: 'plop-templates/templates-config/config-sqlserver.hbs' },
+
+                    // Instalación de pg y Sequelize para SQL Server
+                    { type: 'executeShell', command: 'npm install mssql', path: projectPath },
+
+                    // Generación de app.js específico para SQL Server
+                    { type: 'add', path: '{{pascalCase name}}/src/app.js', templateFile: 'plop-templates/templates-app/app-sqlserver.hbs' },
+
+                    // Archivo .env personalizado para SQL Server
+                    { type: 'add', path: '{{pascalCase name}}/.env', templateFile: 'plop-templates/templates-env/env-sqlserver.hbs' }
+                );
+            }
             return actions;
         }
     });

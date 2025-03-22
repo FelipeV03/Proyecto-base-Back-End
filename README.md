@@ -1,11 +1,11 @@
 # 🚀 Generador de Proyecto Base para Node.js y Express
 
-Este proyecto es un generador de estructura inicial para aplicaciones **Node.js** con **Express**. Permite elegir el tipo de base de datos entre **MongoDB**, **MySQL** o **PostgreSQL**, y configura automáticamente los archivos necesarios según tu elección. También incluye autenticación básica, manejo de rutas y otras dependencias esenciales para el desarrollo de un servidor backend.  
+Este proyecto es un generador de estructura inicial para aplicaciones **Node.js** con **Express**. Permite elegir el tipo de base de datos entre **MongoDB**, **MySQL**, **PostgreSQL** o **SQLServer**, y configura automáticamente los archivos necesarios según tu elección. También incluye autenticación básica, manejo de rutas y otras dependencias esenciales para el desarrollo de un servidor backend.  
 
 ## ✨ Características
 
 ✔ **Generación Automática**: Crea una estructura base de proyecto con **PlopJS**.  
-✔ **Soporte para Bases de Datos**: Compatible con **MongoDB**, **MySQL** y **PostgreSQL**.  
+✔ **Soporte para Bases de Datos**: Compatible con **MongoDB**, **MySQL**, **PostgreSQL** y **SQLServer**.  
 ✔ **Autenticación**: Incluye un middleware básico de autenticación.  
 ✔ **Rutas Preconfiguradas**: Estructura inicial para manejar rutas.  
 ✔ **Dependencias Esenciales**: Incluye las librerías más utilizadas en backend.  
@@ -58,7 +58,7 @@ npx plop express-app
 
 2️⃣ El asistente te pedirá los siguientes datos:  
    - **Nombre del proyecto**: Ingrésalo en formato PascalCase.  
-   - **Tipo de base de datos**: Selecciona entre MongoDB, MySQL o PostgreSQL.  
+   - **Tipo de base de datos**: Selecciona entre MongoDB, MySQL, PostgreSQL o SQLServer.  
 
 3️⃣ Navega al directorio del proyecto generado:  
 
@@ -113,6 +113,9 @@ Esto arrancará el servidor en el puerto **3000** (por defecto).
 - **pg-hstore**: Manejador para JSON en PostgreSQL.  
 - **sequelize**: ORM para bases de datos SQL.  
 
+📌 **SQL Server**  
+- **mssql**: Cliente para conectarse a SQL Server en Node.js.  
+
 ## 📜 Archivos Principales  
 
 📂 **src/app.js**  
@@ -132,8 +135,8 @@ Según la base de datos seleccionada, se generará uno de los siguientes archivo
 
 - **MongoDB**: `src/config/config-mongo.js`  
 - **MySQL**: `src/config/config-mysql.js`  
-- **PostgreSQL**: `src/config/config-postgres.js`  
-
+- **PostgreSQL**: `src/config/config-postgres.js`
+- **SQLServer**: `src/config/config-sqlserver.js`
 ## 🤝 Contribuciones  
 
 Si deseas mejorar este generador, ¡eres bienvenido a contribuir! Asegúrate de seguir buenas prácticas de desarrollo para mantener el código claro y eficiente.  
