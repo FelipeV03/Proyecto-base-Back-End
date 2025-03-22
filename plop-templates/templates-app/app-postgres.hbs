@@ -1,5 +1,5 @@
 // src/app.js
-// Archivo principal para configurar y ejecutar el servidor Express
+// Configuración del servidor con PostgreSQL
 
 const express = require('express');
 const morgan = require('morgan');
@@ -7,27 +7,15 @@ const helmet = require('helmet');
 const cors = require('cors');
 const colors = require('colors');
 require('dotenv').config();
-
-const connectMongoDB = require('./config/config-mongo');
-const { connectMySQL } = require('./config/config-mysql');
 const { connectPostgres } = require('./config/config-postgres');
 
 const app = express();
 
-// Seleccionar conexión de base de datos
-const DB_TYPE = process.env.DB_TYPE || 'mysql'; // mongodb, mysql o postgres
-
+// Conectar a PostgreSQL
 (async () => {
     try {
-        if (DB_TYPE === 'mysql') {
-            await connectMongoDB();
-        } else if (DB_TYPE === 'mongodb') {
-            await connectMySQL();
-        } else if (DB_TYPE === 'postgres') {
-            await connectPostgres();
-        } else {
-            throw new Error('Tipo de base de datos no soportado');
-        }
+        await connectPostgres();
+        console.log('Conectado a PostgreSQL'.green);
     } catch (err) {
         console.error(err.message.red);
         process.exit(1);

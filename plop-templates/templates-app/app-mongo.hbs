@@ -1,0 +1,39 @@
+// src/app.js
+// Configuración del servidor con MongoDB
+
+const express = require('express');
+const morgan = require('morgan');
+const helmet = require('helmet');
+const cors = require('cors');
+const colors = require('colors');
+require('dotenv').config();
+const { connectMongoDB } = require('./config/config-mongo');
+
+const app = express();
+
+// Conectar a MongoDB
+(async () => {
+    try {
+        await connectMongoDB();
+        console.log('Conectado a MongoDB'.green);
+    } catch (err) {
+        console.error(err.message.red);
+        process.exit(1);
+    }
+})();
+
+// Middlewares
+app.use(morgan('dev'));
+app.use(helmet());
+app.use(cors());
+app.use(express.json());
+
+// Rutas
+const indexRoutes = require('./routes/index');
+app.use('/', indexRoutes);
+
+// Iniciar el servidor
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en el puerto ${PORT}`.cyan);
+});

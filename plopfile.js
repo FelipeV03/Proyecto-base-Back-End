@@ -6,13 +6,13 @@ module.exports = function (plop) {
     /**
      * Acción personalizada para ejecutar comandos en la terminal.
      * 
-     * Se utiliza en este generador para ejecutar comandos como:
+     * Se utiliza para ejecutar comandos de configuración del proyecto como:
      * - `npm init -y`: Inicializar un nuevo proyecto con package.json.
      * - `npm install`: Instalar dependencias necesarias.
      * 
      * @param {object} answers - Respuestas ingresadas por el usuario.
      * @param {object} config - Configuración del comando a ejecutar.
-     * @param {string} config.command - El comando a ejecutar en la terminal.
+     * @param {string} config.command - Comando que se ejecutará en la terminal.
      * @param {string} config.path - Ruta donde se ejecutará el comando.
      * @returns {string} Mensaje indicando el comando ejecutado.
      */
@@ -28,8 +28,10 @@ module.exports = function (plop) {
     /**
      * Generador de proyectos Node.js con Express y soporte para bases de datos.
      * 
-     * Este generador crea la estructura base de un backend en Node.js, instala las
-     * dependencias esenciales y configura la base de datos seleccionada por el usuario.
+     * Este generador permite:
+     * - Crear una estructura base para un backend en Node.js.
+     * - Instalar dependencias esenciales.
+     * - Configurar la base de datos elegida por el usuario.
      */
     plop.setGenerator('express-app', {
         description: 'Genera una estructura inicial para un proyecto con Node.js y Express',
@@ -47,7 +49,7 @@ module.exports = function (plop) {
             },
         ],
         actions: function (data) {
-            let projectPath = `./${data.name}`; // Define la ruta donde se creará el proyecto
+            let projectPath = `./${data.name}`; // Ruta donde se creará el proyecto
 
             let actions = [
                 /**
@@ -60,8 +62,6 @@ module.exports = function (plop) {
                 { type: 'add', path: '{{pascalCase name}}/src/routes/index.js', templateFile: 'plop-templates/routes.hbs' },
                 { type: 'add', path: '{{pascalCase name}}/src/controllers/indexController.js', templateFile: 'plop-templates/controllers.hbs' },
                 { type: 'add', path: '{{pascalCase name}}/src/middleware/auth.js', templateFile: 'plop-templates/middleware.hbs' },
-                { type: 'add', path: '{{pascalCase name}}/src/app.js', templateFile: 'plop-templates/app.hbs' },
-                { type: 'add', path: '{{pascalCase name}}/src/.env', templateFile: 'plop-templates/env.hbs' },
 
                 // Agregar archivo .gitignore para ignorar node_modules y archivos sensibles
                 { type: 'add', path: '{{pascalCase name}}/.gitignore', template: 'node_modules/\n.env' },
@@ -93,27 +93,54 @@ module.exports = function (plop) {
             ];
 
             /**
-             * Instalación de dependencias específicas según la base de datos elegida.
-             * Se agregan los paquetes necesarios para conectar y manejar cada tipo de base de datos.
+             * Instalación de dependencias y configuración según la base de datos elegida.
+             * Se agregan los paquetes, archivos de configuración y variables de entorno correspondientes.
              */
             if (data.dbType === 'MongoDB') {
                 actions.push(
-                    { type: 'add', path: '{{pascalCase name}}/src/config/config-mongo.js', templateFile: 'plop-templates/config-mongo.hbs' },
-                    { type: 'executeShell', command: 'npm install mongoose', path: projectPath } // ORM para MongoDB
+                    // Archivo de configuración para MongoDB
+                    { type: 'add', path: '{{pascalCase name}}/src/config/config-mongo.js', templateFile: 'plop-templates/templates-config/config-mongo.hbs' },
+
+                    // Instalación de Mongoose para MongoDB
+                    { type: 'executeShell', command: 'npm install mongoose', path: projectPath },
+
+                    // Generación de app.js específico para MongoDB
+                    { type: 'add', path: '{{pascalCase name}}/src/app.js', templateFile: 'plop-templates/templates-app/app-mongo.hbs' },
+
+                    // Archivo .env personalizado para MongoDB
+                    { type: 'add', path: '{{pascalCase name}}/src/.env', templateFile: 'plop-templates/templates-env/env-mongo.hbs' }
                 );
             }
 
             if (data.dbType === 'MySQL') {
                 actions.push(
-                    { type: 'add', path: '{{pascalCase name}}/src/config/config-mysql.js', templateFile: 'plop-templates/config-mysql.hbs' },
-                    { type: 'executeShell', command: 'npm install mysql2 sequelize', path: projectPath } // ORM para MySQL
+                    // Archivo de configuración para MySQL
+                    { type: 'add', path: '{{pascalCase name}}/src/config/config-mysql.js', templateFile: 'plop-templates/templates-config/config-mysql.hbs' },
+
+                    // Instalación de MySQL2 y Sequelize para MySQL
+                    { type: 'executeShell', command: 'npm install mysql2 sequelize', path: projectPath },
+
+                    // Generación de app.js específico para MySQL
+                    { type: 'add', path: '{{pascalCase name}}/src/app.js', templateFile: 'plop-templates/templates-app/app-mysql.hbs' },
+
+                    // Archivo .env personalizado para MySQL
+                    { type: 'add', path: '{{pascalCase name}}/src/.env', templateFile: 'plop-templates/templates-env/env-mysql.hbs' }
                 );
             }
 
             if (data.dbType === 'PostgreSQL') {
                 actions.push(
-                    { type: 'add', path: '{{pascalCase name}}/src/config/config-postgres.js', templateFile: 'plop-templates/config-postgres.hbs' },
-                    { type: 'executeShell', command: 'npm install pg pg-hstore sequelize', path: projectPath } // ORM para PostgreSQL
+                    // Archivo de configuración para PostgreSQL
+                    { type: 'add', path: '{{pascalCase name}}/src/config/config-postgres.js', templateFile: 'plop-templates/templates-config/config-postgres.hbs' },
+
+                    // Instalación de pg y Sequelize para PostgreSQL
+                    { type: 'executeShell', command: 'npm install pg pg-hstore sequelize', path: projectPath },
+
+                    // Generación de app.js específico para PostgreSQL
+                    { type: 'add', path: '{{pascalCase name}}/src/app.js', templateFile: 'plop-templates/templates-app/app-postgres.hbs' },
+
+                    // Archivo .env personalizado para PostgreSQL
+                    { type: 'add', path: '{{pascalCase name}}/src/.env', templateFile: 'plop-templates/templates-env/env-postgres.hbs' }
                 );
             }
 
