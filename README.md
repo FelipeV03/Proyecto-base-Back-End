@@ -66,20 +66,22 @@ npx plop express-app
 cd NombreDelProyecto
 ```
 
-4️⃣ Instala las dependencias necesarias con:  
-
-```bash
-npm install
-```
-
-5️⃣ Configura el archivo `.env` generado con las credenciales de la base de datos.  
+4️⃣ Configura el archivo `.env` generado con las credenciales de la base de datos.  
 
 ### 🚀 Ejecutar el Proyecto  
 
 Para iniciar el servidor, usa el siguiente comando:  
 
 ```bash
-npm start
+npm run start
+```
+
+### 🔧 Ejecutar el Proyecto
+
+Para iniciar el servidor en entorno de desarrollo, usa el siguiente comando:  
+
+```bash
+npm run dev
 ```
 
 Esto arrancará el servidor en el puerto **3000** (por defecto).  
