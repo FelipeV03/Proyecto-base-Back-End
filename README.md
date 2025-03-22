@@ -1,19 +1,18 @@
+# 🚀 Generador de Proyecto Base para Node.js y Express
 
-# Generador de Proyecto Base para Node.js y Express
+Este proyecto es un generador de estructura inicial para aplicaciones **Node.js** con **Express**. Permite elegir el tipo de base de datos entre **MongoDB**, **MySQL** o **PostgreSQL**, y configura automáticamente los archivos necesarios según tu elección. También incluye autenticación básica, manejo de rutas y otras dependencias esenciales para el desarrollo de un servidor backend.  
 
-Este proyecto es un generador de estructura inicial para aplicaciones **Node.js** con **Express**. Permite elegir el tipo de base de datos entre **MongoDB**, **MySQL** o **PostgreSQL**, y configura automáticamente los archivos necesarios según tu elección. También incluye autenticación básica, manejo de rutas y otras dependencias útiles para el desarrollo de un servidor backend.
+## ✨ Características
 
-## Características
+✔ **Generación Automática**: Crea una estructura base de proyecto con **PlopJS**.  
+✔ **Soporte para Bases de Datos**: Compatible con **MongoDB**, **MySQL** y **PostgreSQL**.  
+✔ **Autenticación**: Incluye un middleware básico de autenticación.  
+✔ **Rutas Preconfiguradas**: Estructura inicial para manejar rutas.  
+✔ **Dependencias Esenciales**: Incluye las librerías más utilizadas en backend.  
 
-- **Generación Automática**: Estructura de proyecto base generada con Plop.
-- **Soporte para Bases de Datos**: Soporte para MongoDB, MySQL o PostgreSQL.
-- **Autenticación**: Middleware para autenticación incluido.
-- **Rutas Preconfiguradas**: Estructura básica para manejo de rutas.
-- **Dependencias Comunes**: Configuración de dependencias esenciales para cualquier proyecto backend.
+## 📂 Estructura del Proyecto  
 
-## Estructura del Proyecto
-
-Una vez que ejecutes el generador, obtendrás la siguiente estructura de archivos:
+Una vez generado el proyecto, se creará la siguiente estructura de archivos:  
 
 ```
 NombreDelProyecto/
@@ -27,125 +26,122 @@ NombreDelProyecto/
 │   ├── middleware/
 │   │   └── auth.js              # Middleware para autenticación
 │   ├── config/
-│   │   └── config-{{dbType}}.js # Configuración de base de datos según tu elección
+│   │   └── config-{{dbType}}.js # Configuración de base de datos según la elección
 │   └── .env                     # Variables de entorno
 │
 └── README.md
 ```
 
-## Instalación y Configuración
+## ⚙️ Instalación y Configuración  
 
-### Prerrequisitos
+### 📌 Prerrequisitos  
 
-Antes de empezar, asegúrate de tener lo siguiente instalado:
+Antes de empezar, asegúrate de tener instalado:  
 
-- **Node.js** (versión 14 o superior)
-- **npm** o **yarn**
-- **Plop** instalado globalmente:
-  
-  ```bash
-  npm install -g plop
-  ```
-
-### Uso del Generador
-
-Sigue estos pasos para generar tu proyecto:
-
-1. Ejecuta el siguiente comando para iniciar el generador:
-
-    ```bash
-    npx plop express-app
-    ```
-
-2. El asistente te pedirá los siguientes datos:
-   - **Nombre del proyecto**: Ingrésalo en formato PascalCase.
-   - **Tipo de base de datos**: Selecciona entre MongoDB, MySQL o PostgreSQL.
-
-3. Navega al directorio del proyecto generado:
-
-    ```bash
-    cd NombreDelProyecto
-    ```
-
-4. Instala las dependencias necesarias con:
-
-    ```bash
-    npm install
-    ```
-
-5. Configura el archivo `.env` generado para tu proyecto, incluyendo las credenciales de la base de datos.
-
-### Ejecutar el Proyecto
-
-Para iniciar el servidor, ejecuta el siguiente comando:
+- **Node.js** (versión 14 o superior)  
+- **npm** o **yarn**  
+- **PlopJS** instalado globalmente:  
 
 ```bash
-npm start
+npm install -g plop
 ```
 
-Esto arrancará el servidor en el puerto especificado (por defecto, el puerto 3000).
+### 🛠 Uso del Generador  
 
-## Dependencias Incluidas
+Sigue estos pasos para generar tu proyecto:  
 
-Las siguientes dependencias se instalan automáticamente según tu elección de base de datos:
+1️⃣ Ejecuta el siguiente comando para iniciar el generador:  
 
-### Generales
+```bash
+npx plop express-app
+```
 
-- **express**: Framework web para Node.js.
-- **colors**: Para agregar colores a los logs en la consola.
-- **dotenv**: Manejo de variables de entorno.
+2️⃣ El asistente te pedirá los siguientes datos:  
+   - **Nombre del proyecto**: Ingrésalo en formato PascalCase.  
+   - **Tipo de base de datos**: Selecciona entre MongoDB, MySQL o PostgreSQL.  
 
-### MongoDB
+3️⃣ Navega al directorio del proyecto generado:  
 
-- **mongoose**: ODM para MongoDB.
+```bash
+cd NombreDelProyecto
+```
 
-### MySQL
+4️⃣ Configura el archivo `.env` generado con las credenciales de la base de datos.  
 
-- **mysql2**: Cliente MySQL.
-- **sequelize**: ORM para bases de datos relacionales.
+### 🚀 Ejecutar el Proyecto  
 
-### PostgreSQL
+Para iniciar el servidor, usa el siguiente comando:  
 
-- **pg**: Cliente PostgreSQL.
-- **pg-hstore**: Manejador para JSON en PostgreSQL.
-- **sequelize**: ORM para bases de datos relacionales.
+```bash
+npm run start
+```
 
-## Archivos Principales
+### 🔧 Ejecutar el Proyecto
 
-### `src/app.js`
+Para iniciar el servidor en entorno de desarrollo, usa el siguiente comando:  
 
-Este archivo configura y arranca el servidor Express. Define las rutas, middleware y otros ajustes esenciales.
+```bash
+npm run dev
+```
 
-### `src/routes/index.js`
+Esto arrancará el servidor en el puerto **3000** (por defecto).  
 
-Aquí se definen las rutas principales de la aplicación. Puedes agregar más rutas según las necesidades del proyecto.
+## 📦 Dependencias Incluidas  
 
-### `src/controllers/indexController.js`
+### 📌 Generales  
 
-Este archivo contiene la lógica que responde a las solicitudes en las rutas definidas.
+- **express**: Framework web para Node.js.  
+- **dotenv**: Manejo de variables de entorno.  
+- **colors**: Agrega colores a los logs en consola.  
+- **cors**: Permite peticiones desde otros dominios.  
+- **helmet**: Añade seguridad a la API.  
+- **morgan**: Registra las solicitudes HTTP.  
+- **bcryptjs**: Cifrado de contraseñas.  
+- **jsonwebtoken**: Manejo de tokens JWT para autenticación.  
 
-### `src/middleware/auth.js`
+### 🗄️ Dependencias por Base de Datos  
 
-Middleware para manejar la autenticación. Puedes personalizarlo para tus necesidades de autenticación.
+📌 **MongoDB**  
+- **mongoose**: ODM para MongoDB.  
 
-### Configuraciones de Base de Datos
+📌 **MySQL**  
+- **mysql2**: Cliente para MySQL.  
+- **sequelize**: ORM para bases de datos SQL.  
 
-Dependiendo de la base de datos que selecciones, uno de los siguientes archivos será generado:
+📌 **PostgreSQL**  
+- **pg**: Cliente para PostgreSQL.  
+- **pg-hstore**: Manejador para JSON en PostgreSQL.  
+- **sequelize**: ORM para bases de datos SQL.  
 
-- **MongoDB**: `src/config/config-mongo.js`
-- **MySQL**: `src/config/config-mysql.js`
-- **PostgreSQL**: `src/config/config-postgres.js`
+## 📜 Archivos Principales  
 
-Configura estos archivos según las credenciales y parámetros de tu base de datos.
+📂 **src/app.js**  
+Contiene la configuración principal del servidor Express, rutas y middlewares.  
 
-## Contribuciones
+📂 **src/routes/index.js**  
+Define las rutas principales de la API.  
 
-Si deseas mejorar este generador, ¡eres bienvenido a contribuir! Solo asegúrate de seguir las mejores prácticas para mantener el código claro y eficiente.
+📂 **src/controllers/indexController.js**  
+Contiene la lógica para manejar las solicitudes a las rutas.  
 
-## Licencia
+📂 **src/middleware/auth.js**  
+Middleware para autenticación, se puede personalizar según el proyecto.  
 
-Este proyecto está licenciado bajo la MIT License.
+📂 **Configuraciones de Base de Datos**  
+Según la base de datos seleccionada, se generará uno de los siguientes archivos:  
+
+- **MongoDB**: `src/config/config-mongo.js`  
+- **MySQL**: `src/config/config-mysql.js`  
+- **PostgreSQL**: `src/config/config-postgres.js`  
+
+## 🤝 Contribuciones  
+
+Si deseas mejorar este generador, ¡eres bienvenido a contribuir! Asegúrate de seguir buenas prácticas de desarrollo para mantener el código claro y eficiente.  
+
+## 📄 Licencia  
+
+Este proyecto está bajo la licencia **MIT**.  
 
 ---
 
-¡Gracias por usar este generador de proyectos base para Node.js y Express! Esperamos que te ahorre tiempo y te ayude a crear aplicaciones backend rápidamente.
+✨ ¡Gracias por usar este generador de proyectos base para Node.js y Express! 🚀
