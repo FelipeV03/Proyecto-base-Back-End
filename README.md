@@ -1,6 +1,8 @@
 # 🚀 Generador de Proyecto Base para Node.js y Express
 
-Este proyecto es un generador de estructura inicial para aplicaciones **Node.js** con **Express**. Permite elegir el tipo de base de datos entre **MongoDB**, **MySQL**, **PostgreSQL** o **SQLServer**, y configura automáticamente los archivos necesarios según tu elección. También incluye autenticación básica, manejo de rutas y otras dependencias esenciales para el desarrollo de un servidor backend.  
+Este proyecto es un generador de estructura inicial para aplicaciones **Node.js** con **Express**. Permite elegir el tipo de base de datos entre **MongoDB**, **MySQL**, **PostgreSQL** o **SQLServer**, y configura automáticamente los archivos necesarios según tu elección. También incluye autenticación básica, manejo de rutas y otras dependencias esenciales para el desarrollo de un servidor backend.
+
+**Ahora también puedes elegir en qué carpeta deseas guardar tu nuevo proyecto.**
 
 ## ✨ Características
 
@@ -9,26 +11,27 @@ Este proyecto es un generador de estructura inicial para aplicaciones **Node.js*
 ✔ **Autenticación**: Incluye un middleware básico de autenticación.  
 ✔ **Rutas Preconfiguradas**: Estructura inicial para manejar rutas.  
 ✔ **Dependencias Esenciales**: Incluye las librerías más utilizadas en backend.  
+✔ **Elección de Ubicacion**: Puedes elegir en qué ubicación se guardará el proyecto generado.  
 
 ## 📂 Estructura del Proyecto  
 
 Una vez generado el proyecto, se creará la siguiente estructura de archivos:  
 
 ```
-NombreDelProyecto/
-│
-├── src/
-│   ├── app.js                  # Configuración principal del servidor
-│   ├── routes/
-│   │   └── index.js             # Definición de rutas de la API
-│   ├── controllers/
-│   │   └── indexController.js   # Controlador para manejar la lógica de las rutas
-│   ├── middleware/
-│   │   └── auth.js              # Middleware para autenticación
-│   ├── config/
-│   │   └── config-{{dbType}}.js # Configuración de base de datos según la elección
-│   └── .env                     # Variables de entorno
-│
+NombreDelProyecto/  
+│  
+├── src/  
+│   ├── app.js                  # Configuración principal del servidor  
+│   ├── routes/  
+│   │   └── index.js             # Definición de rutas de la API  
+│   ├── controllers/  
+│   │   └── indexController.js   # Controlador para manejar la lógica de las rutas  
+│   ├── middleware/  
+│   │   └── auth.js              # Middleware para autenticación  
+│   ├── config/  
+│   │   └── config-{{dbType}}.js # Configuración de base de datos según la elección  
+│   └── .env                     # Variables de entorno  
+│  
 └── README.md
 ```
 
@@ -54,11 +57,13 @@ Sigue estos pasos para generar tu proyecto:
 
 ```bash
 npx plop express-app
-```
+```  
+🔔 **Nota**: `express-app` debe ser reemplazado por el nombre que desees para tu proyecto.
 
 2️⃣ El asistente te pedirá los siguientes datos:  
    - **Nombre del proyecto**: Ingrésalo en formato PascalCase.  
    - **Tipo de base de datos**: Selecciona entre MongoDB, MySQL, PostgreSQL o SQLServer.  
+   - **Ubicación**: Elige en qué ubicación deseas guardar tu nuevo proyecto.  
 
 3️⃣ Navega al directorio del proyecto generado:  
 
@@ -110,7 +115,7 @@ Esto arrancará el servidor en el puerto **3000** (por defecto).
 
 📌 **PostgreSQL**  
 - **pg**: Cliente para PostgreSQL.  
-- **pg-hstore**: Manejador para JSON en PostgreSQL.  
+- **pg-hstore**: Manejador para JSON en PostgreSQL.
 - **sequelize**: ORM para bases de datos SQL.  
 
 📌 **SQL Server**  
@@ -135,8 +140,9 @@ Según la base de datos seleccionada, se generará uno de los siguientes archivo
 
 - **MongoDB**: `src/config/config-mongo.js`  
 - **MySQL**: `src/config/config-mysql.js`  
-- **PostgreSQL**: `src/config/config-postgres.js`
-- **SQLServer**: `src/config/config-sqlserver.js`
+- **PostgreSQL**: `src/config/config-postgres.js`  
+- **SQLServer**: `src/config/config-sqlserver.js`  
+
 ## 🤝 Contribuciones  
 
 Si deseas mejorar este generador, ¡eres bienvenido a contribuir! Asegúrate de seguir buenas prácticas de desarrollo para mantener el código claro y eficiente.  
